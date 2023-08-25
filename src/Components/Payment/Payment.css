@@ -1,0 +1,23 @@
+.payment-container {
+    padding: 20px;
+}
+
+.payment-details {
+    margin-bottom: 20px;
+}
+
+.pay-button {
+    background-color: #29BF12;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.pay-button:hover {
+    background-color: transparent;
+    color: #000;
+}

@@ -1,0 +1,47 @@
+.account-settings-container {
+    display: flex;
+    gap: 20px;
+}
+
+.sidebar {
+    flex: 1;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-right: 1px solid #e0e0e0;
+}
+
+.sidebar h2 {
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin-bottom: 10px;
+}
+
+.sidebar a.sidebar-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #29BF12;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.sidebar a.sidebar-link:hover {
+    color: #197A09;
+}
+
+.sidebar .sidebar-icon {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.content {
+    flex: 3;
+    padding: 20px;
+}

@@ -1,0 +1,5 @@
+.btn-outline-light:hover {
+    background-color: transparent !important;
+    color: #29BF12;
+    border-color: #29BF12;
+}

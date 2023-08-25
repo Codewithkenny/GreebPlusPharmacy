@@ -1,0 +1,15 @@
+.breadcrumb {
+  margin-bottom: 10px;
+  font-size: 1rem;
+  color: #000;
+}
+
+.breadcrumb a,
+.breadcrumb span {
+  color: #666;
+  text-decoration: none;
+}
+
+.breadcrumb .separator {
+  margin: 0 5px;
+}

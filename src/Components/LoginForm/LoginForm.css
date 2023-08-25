@@ -1,0 +1,30 @@
+.form-container {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.form-control {
+    border-color: #ccc;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.form-label {
+    color: #333;
+}
+
+.forgot-password-link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.submit-button {
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.register-link {
+    color: #007bff;
+    text-decoration: none;
+    color: #555;
+}

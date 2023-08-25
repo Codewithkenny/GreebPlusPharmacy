@@ -1,0 +1,7 @@
+/* Add spacing between user icon and logout icon */
+.icon-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    
+}
