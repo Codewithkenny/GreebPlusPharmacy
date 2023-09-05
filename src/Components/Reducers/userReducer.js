@@ -2,7 +2,7 @@ const initialState = {
   firstName: "",
   lastName: "",
   email: "",
-  homeAddress: "",
+  phoneNumber: "",
   isAuthenticated: false,
 };
 
@@ -14,7 +14,7 @@ const userReducer = (state = initialState, action) => {
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
         email: action.payload.email,
-        homeAddress: action.payload.homeAddress,
+        phoneNumber: action.payload.phoneNumber,
         isAuthenticated: true,
       };
     case "LOGOUT":
@@ -23,7 +23,7 @@ const userReducer = (state = initialState, action) => {
         firstName: "",
         lastName: "",
         email: "",
-        homeAddress: "",
+        phoneNumber: "",
         isAuthenticated: false,
       };
     default:

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { AuthData } from "../Components/AuthContext";
 import { Link, NavLink } from 'react-router-dom';
 import { Dropdown } from 'react-bootstrap';
 import {
@@ -14,8 +15,9 @@ import CartPopover from '../Components/Popover/CartPopover';
 import UserPopover from '../Components/Popover/UserPopover';
 import GreenPlusLogo from '../images/greenplus.png';
 import { useSelector, useDispatch } from 'react-redux';
-import  LogoutButton from "../Components/LogoutButton/LogoutButton";
 import { LogoutUserAsync } from "../Components/LogoutUserAsync/LogoutUserAsync";
+// import AuthControl from '../Components/AuthControl/AuthControl';
+import LogoutButton from './LogoutButton/LogoutButton';
 
 
 const TopNav = () => {
@@ -65,9 +67,10 @@ const TopNav = () => {
 function Navbar() {
   const [click, setClick] = useState(false);
   const isAuthenticated = useSelector(
-    (state) => state.auth.token !== null
+    (state) => state.user.isAuthenticated
   );
-  const user = useSelector((state) => state.auth.user !== null);
+  const { user, logout } = AuthData();
+  // const user = useSelector((state) => state.auth.user !== null);
   const [activeMenu, setActiveMenu] = useState(null)
 
   const dispatch = useDispatch();
@@ -223,15 +226,18 @@ function Navbar() {
             <div className="header-icons">
               {isAuthenticated ? (
                 <>
-                  <span className="user-greeting">Hello, {user.firstName}!</span>
-                  <div className="header-icons-separator"></div>
-                  <LogoutButton onLogout={handleLogout} />
-                 
+                <span className='user=greeting'>Hello, {user.firstName}</span>
+                <LogoutButton />
+                  <CartPopover />
+              
                 </>
               ) : (
-                <UserPopover />
+                
+                <div>
+                  <UserPopover />
+                  <CartPopover />
+                </div>
               )}
-              <CartPopover />
             </div>
           </li>
         </ul>

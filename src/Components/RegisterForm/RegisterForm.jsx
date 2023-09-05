@@ -60,7 +60,7 @@ const RegisterForm = () => {
                             {errors.firstName && <p className="error-message">{errors.firstName}</p>}
                         </div>
                     </div>
-                    <div className="form-outline mb-4 text-center">
+                    <div className="form-outline mb-4">
                         <label className="form-label" htmlFor="lastName">
                             Last Name
                         </label>

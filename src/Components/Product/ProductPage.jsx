@@ -44,7 +44,7 @@ const ProductPage = () => {
         <div className="product-list">
             {products.map((data) => (
                 <div key={data._id} className="product-item">
-                    <Link to={`/productDetail/${data._id}`}> 
+                    <Link to={`/products/product-details/${data._id}`}> 
                         <img
                             src={data.imageUrl}
                             alt={data.name}
@@ -57,7 +57,7 @@ const ProductPage = () => {
                             <Ratings rating={data?.ratings} />
                         </div>
                         <div className="product-price">
-                            <span>₦{data.originalPrice}</span>
+                            <span>₦{data.price}</span>
                         </div>
                     </Link>
                     <div className="product-actions">

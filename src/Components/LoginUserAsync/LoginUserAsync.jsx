@@ -4,16 +4,12 @@ const setToken = (token) => {
   localStorage.setItem("authToken", token);
 };
 
-const getToken = () => {
-  return localStorage.getItem("authToken");
-};
-
 export const loginUserAsync = (email, password) => async (dispatch) => {
   dispatch({ type: "LOGIN_START" });
 
   try {
     // Use Axios to make the API call for authentication
-    const response = await axios.post("http://localhost:5000/login", { email, password });
+    const response = await axios.post("http://localhost:5000/api/login", { email, password });
     const token = response.data.token;
     setToken(token); // Store the token in local storage
 

@@ -2,7 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { OverlayTrigger, Popover } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
     removeFromCart,
@@ -18,7 +19,8 @@ const CartPopover = () => {
     const dispatch = useDispatch();
     const popoverRef = useRef(null);
     const [isScrollable, setIsScrollable] = useState(false);
-    
+    const [isPopoverVisible, setPopoverVisible] = useState(false);
+    const navigate = useNavigate(); 
 
     const handleRemoveFromCart = (productId) => {
         dispatch(removeFromCart(productId));
@@ -51,6 +53,7 @@ const CartPopover = () => {
             <div key={item._id} className="cart-item">
                 <div className="cart-item-details">
                     <p>{item.name}</p>
+                    <p>Price: ₦{item.price.toFixed(2)}</p>
                     <div className="quantity-selector">
                         <button
                             className="quantity-selector__button"
@@ -66,6 +69,13 @@ const CartPopover = () => {
                             +
                         </button>
                     </div>
+                </div>
+                <div className="cart-item-image-container">
+                    <img
+                        src={item.imageUrl} 
+                        alt={item.name}
+                        className="cart-item-image"
+                    />
                 </div>
                 <Link
                     to="#"
@@ -85,21 +95,26 @@ const CartPopover = () => {
     }, []);
 
     const handleViewCart = () => {
-        popoverRef.current.hide();
+        setPopoverVisible(false); // Close the popover
+        navigate("/cart");
     };
 
     const handleCheckout = () => {
-        popoverRef.current.hide();
+        setPopoverVisible(false); // Close the popover
+        navigate("/checkout");
     };
+
+  
 
     return (
         <OverlayTrigger
             trigger="click"
             placement="bottom"
+            show={isPopoverVisible} // Control popover visibility with state
+            onToggle={(visibility) => setPopoverVisible(visibility)}
             overlay={
                 <Popover
                     id="cart-popover"
-                    ref={popoverRef}
                     style={{
                         maxWidth: "400px",
                         minWidth: "400px",
@@ -107,7 +122,6 @@ const CartPopover = () => {
                         height: "500px",
                         marginTop: "10px",
                     }}
-                    
                 >
                     <Scrollbars
                         style={{
@@ -127,7 +141,7 @@ const CartPopover = () => {
                                 <p>Total Quantity: {totalQuantity}</p>
                                 <p>Total Amount: ₦{totalAmount.toFixed(2)}</p>
                                 <div className="btn-group" role="group" aria-label="Cart actions">
-                                    <Link to="#" className="btn btn-primary" onClick={handleViewCart}>
+                                    <Link to="/cart" className="btn btn-primary" onClick={handleViewCart}>
                                         View Cart
                                     </Link>
                                     <Link
@@ -158,6 +172,7 @@ const CartPopover = () => {
                             </>
                         )}
                     </Scrollbars>
+                    
                 </Popover>
             }
         >

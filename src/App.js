@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { CartProvider } from "./Components/cartContext"; 
+import { CartProvider } from "./Components/cartContext";
 import Home from "./Pages/Home/Homepage";
 import About from "./Pages/About/About";
 import Navbar from "./Components/Navbar";
@@ -21,31 +21,42 @@ import AccountSettings from "./Components/AccountSettings/AccountSettings";
 import RegisterForm from "./Components/RegisterForm/RegisterForm";
 import AccountOverview from "./Components/AccountSettings/AccountOverview";
 import Contact from "./Pages/Contact/Contact";
-
+import { AuthWrapper } from "./Components/AuthContext";
+import { useDispatch } from "react-redux";
+ 
 
 const App = () => {
+  const dispatch = useDispatch();
+
+
   return (
     <CartProvider>
       <BrowserRouter>
         <ToastContainer />
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="about" element={<About />} />
-          <Route path="Signup" element={<SignUp />} />
-          <Route path="products" element={<ProductPage />} />
-          <Route path="cart" element={<Cart />} />
-          <Route path="contact-us" element={<Contact /> } />
-          <Route path="checkout" element={<Checkout />} />
-          <Route path="checkoutsummary" element={<CheckoutSummary />} />
-          <Route path="payment" element={<Payment/>} />
-          <Route path="customer-dashboard" element={<CustomerDashboard/>} />
-          <Route path="account-settings" element={<AccountSettings/>} />
-          <Route path="account-overview" element={<AccountOverview/>} />
-          <Route path="register" element={<RegisterForm/>} />
-          <Route path="admin" element={<Admin />} />
-        </Routes>
-        <Footer />
+        <AuthWrapper>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="about" element={<About />} />
+            <Route path="Signup" element={<SignUp />} />
+            <Route path="products" element={<ProductPage />} />
+            <Route
+              path="/products/product-details/:id"
+              element={<ProductDetail />}
+            />
+            <Route path="cart" element={<Cart />} />
+            <Route path="contact-us" element={<Contact />} />
+            <Route path="checkout" element={<Checkout />} />
+            <Route path="checkoutsummary" element={<CheckoutSummary />} />
+            <Route path="payment" element={<Payment />} />
+            <Route path="customer-dashboard" element={<CustomerDashboard />} />
+            <Route path="account-settings" element={<AccountSettings />} />
+            <Route path="account-overview" element={<AccountOverview />} />
+            <Route path="register" element={<RegisterForm />} />
+            <Route path="admin" element={<Admin />} />
+          </Routes>
+          <Footer />
+        </AuthWrapper>
       </BrowserRouter>
     </CartProvider>
   );

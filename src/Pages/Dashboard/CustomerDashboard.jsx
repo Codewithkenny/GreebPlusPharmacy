@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import UserProfile from "../../Components/UserProfile/UserProfile"
 import './CustomerDashboard.css';
 
 const CustomerDashboard = () => {
     return (
         <div className="dashboard-container">
-            <h2>Welcome to Your Dashboard</h2>
+            <UserProfile />
             <div className="dashboard-links">
                 <Link to="/orders" className="dashboard-link">
                     View Order History

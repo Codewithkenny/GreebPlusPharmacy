@@ -1,4 +1,4 @@
-.btn.btn-primary {
+ .btn.btn-primary {
     background-color: #29BF12 !important;
     border: none;
 }
@@ -18,19 +18,19 @@
     
 }
 
-
-
-/* Quantity selector */
+.quantity {
+    margin: 0 10px;
+}
 .quantity-selector {
     display: flex;
     align-items: center;
 }
 
-.quantity-selector__button {
+ .quantity-selector__button {
     background-color: #ccc;
     border: none;
     color: white;
-    font-size: 15px;
+    font-size: 20px;
     width: 25px;
     height: 25px;
     display: flex;
@@ -38,8 +38,17 @@
     justify-content: center;
     cursor: pointer;
     margin: 0 5px;
+    padding: 5px;
     border-radius: 50%;
-}
+} 
+
+/* .quantity-selector__button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px;
+} */
 
 .quantity {
     font-size: 16px;
@@ -50,13 +59,9 @@
 
 .remove-link {
     color: #333;
-    /* Set the text color to a red color */
     text-decoration: none;
-    /* Remove the default underline */
     cursor: pointer;
-    /* Change the cursor to a pointer on hover */
     margin-left: 10px;
-    /* Add some spacing to the left of the link */
 }
 
 .remove-link:hover {
@@ -69,4 +74,36 @@
 .scrollable {
     max-height: 300px;
     overflow-y: auto;
+} 
+
+
+.cart-popover {
+    max-width: 400px;
+    min-width: 400px;
+    border-radius: 8px;
+    height: 500px;
+    margin-top: 10px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.total {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.btn-group {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.cart-count {
+    font-weight: bold;
 }

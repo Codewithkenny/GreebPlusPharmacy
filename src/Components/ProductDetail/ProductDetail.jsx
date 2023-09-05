@@ -1,84 +1,72 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import Ratings from "../Product/Ratings";
-import { AiOutlineShoppingCart } from "react-icons/ai";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../../Redux/Actions/cartActions";
-import "./ProductDetail.css";
-import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams, Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import './ProductDetail.css';
+import { addToCart } from '../../Redux/Actions/cartActions'; import axios from 'axios';
 
 const ProductDetail = () => {
     const { id } = useParams();
-    const [productDetails, setProductDetails] = useState({});
-    const [quantity, setQuantity] = useState(1); 
+    const { cartItems } = useSelector((state) => state.cart);
+    const [productDetail, setProductDetail] = useState(null);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        fetchProductDetails(id);
+        fetchProductDetail(id);
     }, [id]);
 
-    const fetchProductDetails = async (productId) => {
+    const fetchProductDetail = async (productId) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/products/find/${productId}`);
-            const data = await response.json();
-            setProductDetails(data);
-        } catch (error) {
-            console.error("Error fetching product details:", error);
+        const response = await axios.get(`http://localhost:5000/api/products/product-details/${productId}`);
+        setProductDetail(response.data)
+        } catch (error){
+            console.log("Error", error)}
+        // if (!response.ok) {
+        //     throw new Error("Error fetching product details");
+        // }
+        // const data = await response.json();
+        // console.log(data);
+    
+    };
+
+    const addToCartHandler = (productId) => {
+        const productInCart = cartItems.find(item => item._id === productId);
+
+        if (!productInCart) {
+            dispatch(addToCart(productDetail)); // Dispatch the addToCart action
+            toast.success("Item added to cart successfully!", { autoClose: 400 });
+        } else {
+            toast.error("Item already in cart!", { autoClose: 400 });
         }
     };
 
-    const breadcrumbsLinks = [
-        { label: "Home", to: "/" },
-        { label: "Products", to: "/products" },
-        { label: productDetails.name }, 
-    ];
 
-    const addToCartHandler = () => {
-        const productWithQuantity = {
-            ...productDetails,
-            quantity: quantity,
-        };
-        dispatch(addToCart(productWithQuantity)); 
-    };
-
-    const handleQuantityChange = (event) => {
-        setQuantity(parseInt(event.target.value));
-    };
+    if (!productDetail) {
+        return <p>Loading...</p>;
+    }
 
     return (
-        <div className="product-detail-container">
-            <Breadcrumbs links={breadcrumbsLinks} />
-            <div className="product-grid">
-                <div className="product-image-container">
-                    {productDetails.imageUrl && (
-                        <img
-                            src={productDetails.imageUrl}
-                            alt={productDetails.name}
-                            className="product-image"
-                        />
-                    )}
+        <div className="product-details-container">
+            <nav className="breadcrumbs">
+                <ul>
+                    <li><Link to="/">Home</Link></li>
+                    <li><span className="breadcrumb-arrow">{'>'}</span></li>
+                    <li><Link to="/products">Products</Link></li>
+                    <li><span className="breadcrumb-arrow">{'>'}</span></li>
+                    <li>{productDetail.name}</li>
+                </ul>
+            </nav>
+            <div className="container">
+                <div className="product-card">
+                    <img src={productDetail.imageUrl} alt={productDetail.name} style={{ maxWidth: "100%" }} />
                 </div>
-                <div className="product-details">
-                    <h2 className="product-name styled-heading">{productDetails.name}</h2>
-                    <Ratings rating={productDetails?.ratings} />
-                    <div className="product-price">
-                        <span>₦{productDetails.originalPrice}</span>
-                    </div>
-                    <div className="quantity-selector">
-                        <label htmlFor="quantity">Quantity:</label>
-                        <input
-                            type="number"
-                            id="quantity"
-                            name="quantity"
-                            value={quantity}
-                            min="1"
-                            max="10"
-                            onChange={handleQuantityChange}
-                        />
-                    </div>
-                    <button className="add-to-cart-button" onClick={addToCartHandler}>
+                <div className="product-card product-details">
+                    <h2 className="text-dark">{productDetail.name}</h2>
+                    <p className="product-details-description" style={{ color: 'black' }}>{productDetail.description}</p>
+                    <p className="product-details-price" style={{ color: 'black' }}>Price: ₦{productDetail.price.toFixed(2)}</p>
+                    <p className="product-details-quantity">Quantity: {productDetail.quantity}</p>
+                    <button className="add-to-cart-button" onClick={() => addToCartHandler(productDetail._id)}>
                         Add to Cart
-                        <AiOutlineShoppingCart size={20} className="cart-icon" />
                     </button>
                 </div>
             </div>

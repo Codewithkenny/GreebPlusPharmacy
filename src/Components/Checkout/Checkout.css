@@ -4,24 +4,26 @@
     padding: 20px;
 }
 
-.cart-items {
+.checkout-items {
     border: 1px solid #ccc;
     padding: 10px;
+    color: #000;
 }
 
 .total-amount {
     margin-top: 10px;
     text-align: right;
     font-weight: bold;
+    color: #000;
+
 }
 
 .checkout-button {
     display: inline-block;
     width: 150px;
-    /* Adjust the width as needed */
     padding: 10px 20px;
     background-color: #29BF12;
-    color: white;
+    color: #000;
     text-align: center;
     text-decoration: none;
     border: none;
@@ -34,4 +36,20 @@
 .checkout-button:hover {
     background-color: transparent;
     color: #000;
+}
+
+.checkout-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #29BF12;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-link:hover {
+    background-color: transparent;
+    color: #000;
+    
 }

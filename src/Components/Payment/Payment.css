@@ -1,9 +1,19 @@
 .payment-container {
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    
 }
 
 .payment-details {
     margin-bottom: 20px;
+}
+
+.pay-button-container {
+    margin-top: 20px;
+    
 }
 
 .pay-button {
